@@ -1,4 +1,3 @@
-//U10416022
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -71,11 +70,15 @@ public class MultipleBounceBall extends Application {
 			Random random = new Random();
 			Paint[] color = { Color.TOMATO, Color.SKYBLUE, Color.YELLOW, Color.PURPLE, Color.SPRINGGREEN };
 			int ballcolor = random.nextInt(5);
+			int ballcolor2 = random.nextInt(5);
 			// Use array to set the ball size at random
 			double size1[] = { 10, 15, 20, 30, 45 };
 			int ballsize = random.nextInt(5);
-
+			int ballsize2 = random.nextInt(5);
 			getChildren().add(new Ball(50, 200, size1[ballsize], (Paint) color[ballcolor]));
+			getChildren().add(new Ball(250, 150, size1[ballsize2], (Paint) color[ballcolor2]));
+			
+
 		}
 
 		public void subtract() {
@@ -107,6 +110,7 @@ public class MultipleBounceBall extends Application {
 		protected void moveBall() {
 			for (Node node : this.getChildren()) {
 				Ball ball = (Ball) node;
+				Ball ball2 = (Ball) node;
 				// Check boundaries
 				if (ball.getCenterX() < ball.getRadius() || ball.getCenterX() > getWidth() - ball.getRadius()) {
 					ball.dx *= -1; // Change ball move direction
@@ -114,16 +118,26 @@ public class MultipleBounceBall extends Application {
 				if (ball.getCenterY() < ball.getRadius() || ball.getCenterY() > getHeight() - ball.getRadius()) {
 					ball.dy *= -1; // Change ball move direction
 				}
+				
+				if (ball2.getCenterX() < ball2.getRadius() || ball2.getCenterX() > getWidth() - ball2.getRadius()) {
+					ball.dx2 *= -1; // Change ball move direction
+				}
+				if (ball2.getCenterY() < ball2.getRadius() || ball2.getCenterY() > getHeight() - ball2.getRadius()) {
+					ball.dy2 *= -1; // Change ball move direction
+				}
 
 				// Adjust ball position
 				ball.setCenterX(ball.dx + ball.getCenterX());
 				ball.setCenterY(ball.dy + ball.getCenterY());
+				ball2.setCenterX(ball2.dx2+ ball2.getCenterX());
+				ball2.setCenterY(ball2.dy2 + ball2.getCenterY());
 			}
 		}
 	}
 
 	public class Ball extends Circle {
 		private double dx = 1, dy = 1;
+		private double dx2 = 1, dy2 = 1;
 		public Ball(double centerX, double centerY, double radius, Paint fill) {
 			super(centerX, centerY, radius, fill);
 		}
