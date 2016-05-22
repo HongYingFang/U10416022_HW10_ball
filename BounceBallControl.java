@@ -17,11 +17,11 @@ import javafx.util.Duration;
 import java.util.Random;
 import javafx.scene.paint.Paint;
 
-public class MultipleBounceBall extends Application {
+public class BounceBallControl extends Application {
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) {
-		MultipleBallPane ballPane = new MultipleBallPane();
-		ballPane.setStyle("-fx-border-color: yellow");
+		BallPane ballPane = new BallPane();
+		ballPane.setStyle("-fx-border-color:black");
 
 		Button btAdd = new Button("+");
 		Button btSubtract = new Button("-");
@@ -50,15 +50,15 @@ public class MultipleBounceBall extends Application {
 
 		// Create a scene and place the pane in the stage
 		Scene scene = new Scene(pane, 450, 300);
-		primaryStage.setTitle("MultipleBounceBall"); // Set the stage title
+		primaryStage.setTitle("BounceBall"); // Set the stage title
 		primaryStage.setScene(scene); // Place the scene in the stage
 		primaryStage.show(); // Display the stage
 	}
 
-	private class MultipleBallPane extends Pane {
+	private class BallPane extends Pane {
 		private Timeline animation;
 
-		public MultipleBallPane() {
+		public BallPane() {
 			// Create an animation for moving the ball
 			animation = new Timeline(new KeyFrame(Duration.millis(50), e -> moveBall()));
 			animation.setCycleCount(Timeline.INDEFINITE);
